@@ -1,5 +1,5 @@
-<svg widht="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
     stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Close">
-    <path
-        d='M7.314 5.9l3.535-3.536A1 1 0 1 0 9.435.95L5.899 4.485 2.364.95A1 1 0 1 0 .95 2.364l3.535 3.535L.95 9.435a1 1 0 1 0 1.414 1.414l3.535-3.535 3.536 3.535a1 1 0 1 0 1.414-1.414L7.314 5.899z' />
+    <line x1="7" y1="7" x2="17" y2="17"></line>
+    <line x1="17" y1="7" x2="7" y2="17"></line>
 </svg>
