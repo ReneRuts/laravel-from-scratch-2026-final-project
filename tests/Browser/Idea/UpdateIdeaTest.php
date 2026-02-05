@@ -2,7 +2,6 @@
 
 use App\Models\Idea;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 it('shows the initial input state', function () {
     $this->actingAs($user = User::factory()->create());
