@@ -17,11 +17,11 @@ class UpdateIdea
             'links',
         ])->toArray();
 
-        if ($attributes['image'] ?? false) {
-            $data['image_path'] = $attributes['image']->store('ideas', 'public');
-        }
-
         DB::transaction(function () use ($idea, $data, $attributes) {
+            if ($attributes['image'] ?? false) {
+                $data['image_path'] = $attributes['image']->store('ideas', 'public');
+            }
+            
             $idea->update($data);
 
             $idea->steps()->delete(); 

@@ -1,17 +1,14 @@
 @props(['idea' => new App\Models\Idea()])
 
 <x-modal name="{{ $idea->exists ? 'edit-idea' : 'create-idea' }}" title=" {{ $idea->exists ? 'Edit Idea' : 'New Idea' }}">
-    <form 
-        x-data="{
-            status: @js(old('status', $idea->status->value)),
-            newLink: '',
-            links: @js(old('links', $idea->links ?? [])),
-            newStep: '',
-            steps: @js(old('steps', $idea->steps->map->only(['id', 'description', 'completed'])))
-        }" 
-        method="POST"
-        action="{{ $idea->exists ? route('idea.update', $idea) : route('idea.store') }}"
-        enctype="multipart/form-data">
+    <form x-data="{
+        status: @js(old('status', $idea->status->value)),
+        newLink: '',
+        links: @js(old('links', $idea->links ?? [])),
+        newStep: '',
+        steps: @js(old('steps', $idea->steps->map->only(['id', 'description', 'completed'])))
+    }" method="POST"
+        action="{{ $idea->exists ? route('idea.update', $idea) : route('idea.store') }}" enctype="multipart/form-data">
         @csrf
 
         @if ($idea->exists)
@@ -65,9 +62,10 @@
 
                     <template x-for="(step, index) in steps" :key="step.id || index">
                         <div class="flex gap-x-2 items-center">
-                            <input :name="`steps[${index}][description]`" x-model="step.description" class="input" readonly>
-                            <input type="hidden" :name="`steps[${index}][completed]`" x-model="step.completed ? '1' : '0'" class="input" readonly>
-
+                            <input :name="`steps[${index}][description]`" x-model="step.description" class="input"
+                                readonly>
+                            <input type="hidden" :name="`steps[${index}][completed]`"
+                                :value="step.completed ? '1' : '0'">
                             <button type="button" @click="steps.splice(index, 1)" aria-label="Remove step"
                                 class="form-muted-icon">
                                 <x-icons.close />
@@ -78,7 +76,8 @@
                     <div class="flex gap-x-2 items-center">
                         <input x-model="newStep" id="new-step" data-test="new-step"
                             placeholder="What needs to be done?" class="input flex-1" spellcheck="false">
-                        <button type="button" @click="steps.push({ description: newStep.trim(), completed: false}); newStep=''"
+                        <button type="button"
+                            @click="steps.push({ description: newStep.trim(), completed: false}); newStep=''"
                             :disabled="newStep.trim().length === 0" aria-label="Add a new step" class="form-muted-icon"
                             data-test="submit-new-step-button">
                             <x-icons.add />

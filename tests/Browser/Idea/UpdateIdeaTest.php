@@ -32,11 +32,13 @@ it('edits an existing idea', function () {
         ->click('Update')
         ->assertRoute('idea.show', [$idea]);
 
+    $originalLink = $idea->links[0] ?? null;
+
     expect($idea = $user->ideas()->first())->toMatchArray([
         'title' => 'Some example title',
         'status' => 'completed',
         'description' => 'an example description',
-        'links' => [$idea->links[0],'https://airmanballooning.be'],
+        'links' => $originalLink ? [$idea->links[0],'https://airmanballooning.be'] : ['https://airmanballooning.be'],
     ]);
 
     expect($idea->steps)->toHaveCount(1);

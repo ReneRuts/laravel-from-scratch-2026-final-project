@@ -52,17 +52,17 @@ class Idea extends Model
         return $this->hasMany(Step::class);
     }
 
-    protected static function booted(){
-        static::deleting(function (Idea $idea) {
-            if($idea->image_path){
+    protected static function booted(): void{
+        static::deleted(function (Idea $idea) {
+            if ($idea->image_path) {
                 Storage::disk('public')->delete($idea->image_path);
             }
         });
 
-        static::updating(function (Idea $idea) {
-            if($idea->isDirty('image_path')){
+        static::updated(function (Idea $idea) {
+            if ($idea->wasChanged('image_path')) {
                 $old = $idea->getOriginal('image_path');
-                if($old && Storage::disk('public')->exists($old)){
+                if ($old && Storage::disk('public')->exists($old)) {
                     Storage::disk('public')->delete($old);
                 }
             }
