@@ -115,7 +115,7 @@
 
             <div class="flex justify-end gap-x-5">
                 <button type="button" @click="$dispatch('close-modal')">Cancel</button>
-                <button type="submit" class="btn">{{ $idea->exists ? 'Update' : 'Create' }}</button>
+                <button type="submit" class="btn" data-test="button-{{ $idea->exists ? 'update' : 'create' }}">{{ $idea->exists ? 'Update' : 'Create' }}</button>
             </div>
         </div>
     </form>

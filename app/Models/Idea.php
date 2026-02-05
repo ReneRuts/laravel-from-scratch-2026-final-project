@@ -52,7 +52,8 @@ class Idea extends Model
         return $this->hasMany(Step::class);
     }
 
-    protected static function booted(): void{
+    protected static function booted(): void
+    {
         static::deleted(function (Idea $idea) {
             if ($idea->image_path) {
                 Storage::disk('public')->delete($idea->image_path);

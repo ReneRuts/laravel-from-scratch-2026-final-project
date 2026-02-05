@@ -58,6 +58,7 @@ class IdeaController extends Controller
     public function show(Idea $idea)
     {
         Gate::authorize('workWith', $idea);
+
         return view('idea.show', [
             'idea' => $idea,
         ]);
@@ -80,7 +81,7 @@ class IdeaController extends Controller
 
         $action->handle($request->safe()->all(), $idea);
 
-        return back()->with('success','Idea updated!');
+        return back()->with('success', 'Idea updated!');
     }
 
     /**

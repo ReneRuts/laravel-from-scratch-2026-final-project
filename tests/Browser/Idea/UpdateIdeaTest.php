@@ -2,8 +2,9 @@
 
 use App\Models\Idea;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
-it('shows the initial input state', function (){
+it('shows the initial input state', function () {
     $this->actingAs($user = User::factory()->create());
 
     $idea = Idea::factory()->for($user)->create();
@@ -30,14 +31,14 @@ it('edits an existing idea', function () {
         ->click('@submit-new-link-button')
         ->fill('@new-step', 'Do a thing')
         ->click('@submit-new-step-button')
-        ->click('Update')
+        ->click('@button-update')
         ->assertRoute('idea.show', [$idea]);
 
     expect($idea = $user->ideas()->first())->toMatchArray([
         'title' => 'Some example title',
         'status' => 'completed',
         'description' => 'an example description',
-        'links' => $originalLink ? [$originalLink,'https://airmanballooning.be'] : ['https://airmanballooning.be'],
+        'links' => $originalLink ? [$originalLink, 'https://airmanballooning.be'] : ['https://airmanballooning.be'],
     ]);
 
     expect($idea->steps)->toHaveCount(1);

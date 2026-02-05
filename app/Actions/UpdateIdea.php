@@ -21,10 +21,10 @@ class UpdateIdea
             if ($attributes['image'] ?? false) {
                 $data['image_path'] = $attributes['image']->store('ideas', 'public');
             }
-            
+
             $idea->update($data);
 
-            $idea->steps()->delete(); 
+            $idea->steps()->delete();
             $idea->steps()->createMany($attributes['steps'] ?? []);
         });
     }
