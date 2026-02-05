@@ -13,13 +13,19 @@ it('creates a new idea', function () {
         ->click('@submit-new-link-button')
         ->fill('@new-link', 'https://hairshopper.be')
         ->click('@submit-new-link-button')
+        ->fill('@new-step', 'Do a thing')
+        ->click('@submit-new-step-button')
+        ->fill('@new-step', 'Do another thing')
+        ->click('@submit-new-step-button')
         ->click('@submit-idea-button')
         ->assertPathIs('/ideas');
 
-    expect($user->ideas()->first())->toMatchArray([
+    expect($idea = $user->ideas()->first())->toMatchArray([
         'title' => 'Some example title',
         'status' => 'completed',
         'description' => 'an example description',
         'links' => ['https://airmanballooning.be', 'https://hairshopper.be'],
     ]);
+
+    expect($idea->steps)->toHaveCount(2);
 });
