@@ -45,11 +45,18 @@ class IdeaController extends Controller
      */
     public function store(StoreIdeaRequest $request)
     {
-        $idea = Auth::user()->ideas()->create($request->safe()->except('steps'));
+        // dd(vars: $request->all());
+        $idea = Auth::user()->ideas()->create($request->safe()->except('steps', 'image'));
 
         $idea->steps()->createMany(
             collect($request->steps)->map(fn ($step) => ['description' => $step])
         );
+
+        $imagePath = $request->image->store('ideas', 'public');
+
+        $idea->update([
+            'image_path' => $imagePath,
+        ]);
 
         return to_route('idea.index')->with('success', 'Idea Created!');
 
@@ -86,7 +93,7 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea)
     {
-        $this->authorize('delete', $idea);
+        // authorize the user
 
         $idea->delete();
 

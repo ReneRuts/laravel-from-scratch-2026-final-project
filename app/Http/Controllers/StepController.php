@@ -10,7 +10,7 @@ class StepController extends Controller
 {
     public function update(Step $step)
     {
-        $this->authorize('update', $step);
+        // authorize the user before updating step
 
         $step->update(['completed' => ! $step->completed]);
 
