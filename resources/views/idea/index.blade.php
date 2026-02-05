@@ -143,7 +143,7 @@
 
                     <div class="flex justify-end gap-x-5">
                         <button type="button" @click="$dispatch('close-modal')">Cancel</button>
-                        <button type="submit" class="btn">Create</button>
+                        <button type="submit" class="btn" data-test="submit-idea-button">Create</button>
                     </div>
                 </div>
             </form>

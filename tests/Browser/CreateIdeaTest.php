@@ -13,7 +13,7 @@ it('creates a new idea', function () {
         ->click('@submit-new-link-button')
         ->fill('@new-link', 'https://hairshopper.be')
         ->click('@submit-new-link-button')
-        ->click('Create')
+        ->click('@submit-idea-button')
         ->assertPathIs('/ideas');
 
     expect($user->ideas()->first())->toMatchArray([
