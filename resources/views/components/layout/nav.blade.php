@@ -17,8 +17,8 @@
             @endauth
 
             @guest
-                <a href="{{ route('login') }}">Sign In</a>
-                <a href="{{ route('register') }}" class="btn">Register</a>
+                <a href="{{ route('login') }}">{{ __('app.sign-in-nav-button') }}</a>
+                <a href="{{ route('register') }}" class="btn">{{ __('app.register-nav-button') }}</a>
             @endguest
         </div>
     </div>
